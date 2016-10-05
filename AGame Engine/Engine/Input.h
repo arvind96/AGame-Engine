@@ -4,7 +4,7 @@ class Input
 public:
 	Input();
 	
-	void GetInput();
+	void ProcessInput();
 
 	float GetXInput() { return xInput; }
 	float GetYInput() { return yInput; }

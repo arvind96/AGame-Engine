@@ -2,6 +2,10 @@
 #include <GL\glew.h>
 #include <iostream>
 
+Display::Display()
+{
+}
+
 Display::Display(int width, int height, const std::string& title)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -29,8 +33,6 @@ Display::Display(int width, int height, const std::string& title)
 		std::cerr << "Glew failed to initialize!" << std::endl;
 	}
 
-	m_isClosed = false;
-
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BACK);
@@ -51,20 +53,7 @@ void Display::Clear(float r, float g, float b, float a)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-bool Display::IsClosed()
-{
-	return m_isClosed;
-}
-
 void Display::Update()
 {
 	SDL_GL_SwapWindow(m_window);
-	SDL_Event e;
-	while (SDL_PollEvent(&e))
-	{
-		if (e.type == SDL_QUIT)
-		{
-			m_isClosed = true;
-		}
-	}
 }
