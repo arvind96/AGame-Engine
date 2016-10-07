@@ -1,9 +1,13 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
 #include "Display.h"
 #include "Input.h"
 #include "Time.h"
+#include "MonoBehaviour.h"
+#include <thread>
+#include "windows.h"
 
 using namespace std;
 
@@ -22,6 +26,8 @@ namespace AGameEngine {
 		void Quit();
 	private:
 		void GameLoop();
+		void FixedUpdate();
+		void FixedLoop();
 
 		Display _display;
 		int _displayWidth;
@@ -30,6 +36,9 @@ namespace AGameEngine {
 		Input _input;
 		Time _time;
 		GameState _gameState;
+
+		int _updateTimeCounter = 0;
+		int _fixedTimeCounter = 0;
 	};
 
 

@@ -8,6 +8,7 @@
 #include "Texture.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "TestScene.h"
 
 #define WIDTH 1024
 #define HEIGHT 576
@@ -17,8 +18,8 @@ using namespace AGameEngine;
 int main(int argc, char** argv)
 {
 	MainGame maingame;
+	TestScene testScene(maingame);
 	maingame.run();
-
 
 	
 	//Display display(WIDTH, HEIGHT, "Test Game");

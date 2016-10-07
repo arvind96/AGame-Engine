@@ -3,24 +3,28 @@
 
 namespace AGameEngine {
 
-	Time::Time() :
-		_timeScale(1.0)
+	int Time::_realTimeSinceStartup = 0;
+	float Time::_timeScale = 1.0;	//Set the timescale to 1.0
+	int Time::_deltaTime = 0;
+	float Time::_unscaledDeltaTime = 0;
+	int Time::_fixedDeltaTime = 20;	//for 50Hz
+
+	Time::Time()
 	{
 	}
-
 
 	Time::~Time()
 	{
 	}
 
-	void Time::Update()
+	void Time::UpdateDeltaTime(int value)
 	{
-		_deltaTime = SDL_GetTicks() - _realTimeSinceStartup;
-		_realTimeSinceStartup = SDL_GetTicks();
+		_deltaTime = value;
 	}
 
 	int Time::GetRealTimeSinceStartUp()
 	{
+		_realTimeSinceStartup = SDL_GetTicks();
 		return _realTimeSinceStartup;
 	}
 
@@ -34,15 +38,24 @@ namespace AGameEngine {
 		_timeScale = value;
 	}
 	
-	float Time::GetDeltaTime()
+	int Time::GetDeltaTime()
 	{
 		return _deltaTime;
 	}
 
-	float Time::GetUnscaledDeltaTime()
+	int Time::GetUnscaledDeltaTime()
 	{
 		return _unscaledDeltaTime;
 	}
 
+	int Time::GetFixedDeltaTime()
+	{
+		return _fixedDeltaTime;
+	}
+
+	void Time::SetFixedDeltaTime(int value)
+	{
+		_fixedDeltaTime = value;
+	}
 
 }
