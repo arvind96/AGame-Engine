@@ -34,22 +34,18 @@ namespace AGameEngine {
 		_display.Clear(0.0f, 0.15f, 0.15f, 1.0f);
 		_display.Update();
 		cout << "Loading Time: " << SDL_GetTicks() << "ms" << endl;
-		for (int i = 0; i < MonoBehaviour::allMonoBehaviors.size(); i++)
+		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
 		{
-			MonoBehaviour::allMonoBehaviors[i]->Start();
+			mb->Start();
 		}
 		thread tFixed(&MainGame::FixedUpdate, this);
 		tFixed.detach();
 		while (_gameState == GameState::RUNNING)
 		{
 			GameLoop();
-			SDL_Event e;
-			while (SDL_PollEvent(&e))
+			if (Input::Quit())
 			{
-				if (e.type == SDL_QUIT)
-				{
-					_gameState = GameState::EXIT;
-				}
+				Quit();
 			}
 		}
 	}
@@ -59,14 +55,21 @@ namespace AGameEngine {
 		_time.UpdateDeltaTime(SDL_GetTicks() - _updateTimeCounter);
 		_updateTimeCounter = SDL_GetTicks();
 		_input.ProcessInput();
-
-		for (int i = 0; i < MonoBehaviour::allMonoBehaviors.size(); i++)
+		/*
+		auto it = MonoBehaviour::allMonoBehaviors.begin();
+		while(it != MonoBehaviour::allMonoBehaviors.end())
 		{
-			MonoBehaviour::allMonoBehaviors[i]->Update();
+			(*it)->Update();
+			it++;
 		}
-		for (int i = 0; i < MonoBehaviour::allMonoBehaviors.size(); i++)
+		*/
+		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
 		{
-			MonoBehaviour::allMonoBehaviors[i]->LateUpdate();
+			mb->Update();
+		}
+		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
+		{
+			mb->LateUpdate();
 		}
 
 		_display.Clear(0.0f, 0.15f, 0.15f, 1.0f);
@@ -88,9 +91,9 @@ namespace AGameEngine {
 
 	void MainGame::FixedLoop()
 	{
-		for (int i = 0; i < MonoBehaviour::allMonoBehaviors.size(); i++)
+		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
 		{
-			MonoBehaviour::allMonoBehaviors[i]->FixedUpdate();
+			mb->FixedUpdate();
 		}
 	}
 

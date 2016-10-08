@@ -1,29 +1,19 @@
 #include "MonoBehaviour.h"
 
-std::vector <MonoBehaviour*> MonoBehaviour::allMonoBehaviors;
+namespace AGameEngine {
 
-MonoBehaviour::MonoBehaviour()
-{
-	allMonoBehaviors.push_back(this);
-}
+	std::list <MonoBehaviour*> MonoBehaviour::allMonoBehaviors;
+
+	MonoBehaviour::MonoBehaviour()
+	{
+		allMonoBehaviors.push_back(this);
+	}
+
+	MonoBehaviour::~MonoBehaviour()
+	{
+		replace(allMonoBehaviors.begin(), allMonoBehaviors.end(), this, *allMonoBehaviors.begin());
+		//allMonoBehaviors.remove(this);
+	}
 
 
-MonoBehaviour::~MonoBehaviour()
-{
-}
-
-void MonoBehaviour::Start()
-{
-}
-
-void MonoBehaviour::Update()
-{
-}
-
-void MonoBehaviour::LateUpdate()
-{
-}
-
-void MonoBehaviour::FixedUpdate()
-{
 }

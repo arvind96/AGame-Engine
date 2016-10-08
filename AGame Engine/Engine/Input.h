@@ -1,18 +1,29 @@
 #pragma once
-class Input
-{
-public:
-	Input();
-	
-	void ProcessInput();
+#include <iostream>
+#include <SDL\SDL.h>
 
-	float GetXInput() { return xInput; }
-	float GetYInput() { return yInput; }
-	
-	
-	~Input();
-private:
-	float xInput;
-	float yInput;
-};
+namespace AGameEngine {
 
+	class Input
+	{
+	public:
+		Input();
+		~Input();
+
+		void ProcessInput();
+
+		float GetXInput() { return xInput; }
+		float GetYInput() { return yInput; }
+
+		static bool GetKeyDown(SDL_Keycode keycode);
+		static bool GetKeyUp(SDL_Keycode keycode);
+		static bool Quit();
+	private:
+		float xInput;
+		float yInput;
+
+
+		static SDL_Event _singleHitKeyEvent;
+	};
+
+}

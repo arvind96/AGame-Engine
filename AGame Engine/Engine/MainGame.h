@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <vector>
+#include <algorithm>
 #include "Display.h"
 #include "Input.h"
 #include "Time.h"

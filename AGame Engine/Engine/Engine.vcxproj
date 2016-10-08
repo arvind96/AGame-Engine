@@ -140,11 +140,15 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Behaviour.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MonoBehaviour.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.c" />
@@ -152,12 +156,16 @@
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Behaviour.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MonoBehaviour.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />

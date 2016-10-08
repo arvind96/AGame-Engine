@@ -18,6 +18,7 @@ using namespace AGameEngine;
 int main(int argc, char** argv)
 {
 	MainGame maingame;
+	MonoBehaviour dummy;
 	TestScene testScene(maingame);
 	maingame.run();
 

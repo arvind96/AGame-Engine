@@ -3,6 +3,8 @@
 #include <fstream>
 #include "Transform.h"
 
+using namespace AGameEngine;
+
 Shader::Shader(const std::string& fileName)
 {
 	m_program = glCreateProgram();

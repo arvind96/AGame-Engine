@@ -5,6 +5,8 @@
 #include "Transform.h"
 #include "Camera.h"
 
+using namespace AGameEngine;
+
 class Shader
 {
 public:

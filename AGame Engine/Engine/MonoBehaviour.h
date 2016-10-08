@@ -1,18 +1,25 @@
 #pragma once
-#include <vector>
+#include "Behaviour.h"
+#include <list>
+#include <algorithm>
 
-class MonoBehaviour
-{
-public:
-	MonoBehaviour();
-	~MonoBehaviour();
+using namespace std;
 
-	virtual void Start();
-	virtual void Update();
-	virtual void LateUpdate();
-	virtual void FixedUpdate();
+namespace AGameEngine {
 
-	static std::vector <MonoBehaviour*> allMonoBehaviors;
-private:
-};
+	class MonoBehaviour : public Behaviour
+	{
+	public:
+		MonoBehaviour();
+		~MonoBehaviour();
 
+		virtual inline void Start() {}
+		virtual inline void Update() {}
+		virtual inline void LateUpdate() {}
+		virtual inline void FixedUpdate() {}
+
+		static std::list <MonoBehaviour*> allMonoBehaviors;
+	private:
+	};
+
+}
