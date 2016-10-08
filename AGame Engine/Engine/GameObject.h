@@ -1,16 +1,29 @@
 #pragma once
 #include "Object.h"
+#include <list>
 
 using namespace std;
 
 namespace AGameEngine {
 
+	class Component;
+	class Transform;
 	class GameObject : public Object
 	{
 	public:
 		GameObject();
 		~GameObject();
-		GameObject(const string name);
+		GameObject(const string& name);
+
+		inline void AddComponent(Component* componentRef)
+		{
+			attachedComponents.push_back(componentRef);
+		}
+
+		inline void RemoveComponent(Component* componentRef)
+		{
+			attachedComponents.remove(componentRef);
+		}
 
 		int layer;
 		int tag;
@@ -20,6 +33,10 @@ namespace AGameEngine {
 
 	private:
 		bool _isActive;
+
+		Transform* transform;
+
+		list<Component*> attachedComponents;
 	};
 
 }

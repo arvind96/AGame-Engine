@@ -19,6 +19,7 @@ namespace AGameEngine {
 		virtual inline void FixedUpdate() {}
 
 		static std::list <MonoBehaviour*> allMonoBehaviors;
+		static MonoBehaviour* nullMonoBehaviour;
 	private:
 	};
 

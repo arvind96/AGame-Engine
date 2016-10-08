@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "Component.h"
+#include "Transform.h"
 
 namespace AGameEngine {
 
@@ -7,13 +9,19 @@ namespace AGameEngine {
 		layer(0),
 		tag(0)
 	{
+		transform = new Transform();
 	}
 
 	GameObject::~GameObject()
 	{
+		delete transform;
+		for each(Component* c in attachedComponents)
+		{
+			delete c;
+		}
 	}
 
-	GameObject::GameObject(const string name)
+	GameObject::GameObject(const string& name)
 	{
 		GameObject();
 		this->name = name;

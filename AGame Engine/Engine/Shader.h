@@ -5,12 +5,13 @@
 #include "Transform.h"
 #include "Camera.h"
 
+using namespace std;
 using namespace AGameEngine;
 
-class Shader
+class Shader : public Object
 {
 public:
-	Shader(const std::string& fileName);
+	Shader(const std::string& fileName);	//Location of shader vert and frag files, eg. "./Assets/Shaders/BasicShader"
 
 	void Bind();
 	void Update(const Transform& transform, const Camera& camera);

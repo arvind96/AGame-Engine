@@ -13,7 +13,8 @@ public:
 
 	void Update();
 
-	MonkeyScript *_myMonkey;
+	MonkeyScript* _myMonkey;
+	GameObject* myObject;
 private:
 };
 

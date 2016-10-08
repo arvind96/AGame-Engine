@@ -3,6 +3,7 @@
 namespace AGameEngine {
 
 	std::list <MonoBehaviour*> MonoBehaviour::allMonoBehaviors;
+	MonoBehaviour* MonoBehaviour::nullMonoBehaviour;
 
 	MonoBehaviour::MonoBehaviour()
 	{
@@ -11,9 +12,8 @@ namespace AGameEngine {
 
 	MonoBehaviour::~MonoBehaviour()
 	{
-		replace(allMonoBehaviors.begin(), allMonoBehaviors.end(), this, *allMonoBehaviors.begin());
+		replace(allMonoBehaviors.begin(), allMonoBehaviors.end(), this, nullMonoBehaviour);
 		//allMonoBehaviors.remove(this);
 	}
-
 
 }

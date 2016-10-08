@@ -4,45 +4,47 @@
 #include <glm/gtx/transform.hpp>
 
 using namespace std;
+using namespace glm;
 
 namespace AGameEngine {
 
 	class Transform : public Component
 	{
 	public:
-		Transform(const glm::vec3& pos = glm::vec3(), const glm::vec3& rot = glm::vec3(), const glm::vec3& scale = glm::vec3(1.0, 1.0, 1.0)) :
-			m_pos(pos),
-			m_rot(rot),
-			m_scale(scale)
+		Transform(const vec3& position = vec3(), const vec3& eulerAngles = vec3(), const vec3& scale = vec3(1.0, 1.0, 1.0)) :
+			_position(position),
+			_eulerAngles(eulerAngles),
+			_scale(scale)
 		{
 		}
 
-		inline glm::mat4 GetModel() const
-		{
-			glm::mat4 posMat = glm::translate(m_pos);
-			glm::mat4 rotX = glm::rotate(m_rot.x, glm::vec3(1.0, 0.0, 0.0));
-			glm::mat4 rotY = glm::rotate(m_rot.y, glm::vec3(0.0, 1.0, 0.0));
-			glm::mat4 rotZ = glm::rotate(m_rot.z, glm::vec3(0.0, 0.0, 1.0));
-			glm::mat4 scaleMat = glm::scale(m_scale);
+		~Transform(){}
 
-			glm::mat4 rotMat = rotX * rotY * rotZ;
+		inline mat4 GetModel() const
+		{
+			mat4 posMat = translate(_position);
+			mat4 rotX = rotate(_eulerAngles.x, vec3(1.0, 0.0, 0.0));
+			mat4 rotY = rotate(_eulerAngles.y, vec3(0.0, 1.0, 0.0));
+			mat4 rotZ = rotate(_eulerAngles.z, vec3(0.0, 0.0, 1.0));
+			mat4 rotMat = rotX * rotY * rotZ;
+			mat4 scaleMat = scale(_scale);
 
 			return posMat * rotMat * scaleMat;
 		}
 
 
-		inline glm::vec3 GetPos() { return m_pos; }
-		inline glm::vec3 GetRot() { return m_rot; }
-		inline glm::vec3 GetScale() { return m_scale; }
+		inline vec3 GetPosition() { return _position; }
+		inline vec3 GetEulerAngles() { return _eulerAngles; }
+		inline vec3 GetScale() { return _scale; }
 
-		inline void SetPos(glm::vec3& pos) { m_pos = pos; }
-		inline void SetRot(glm::vec3& rot) { m_rot = rot; }
-		inline void SetScale(glm::vec3& scale) { m_scale = scale; }
+		inline void SetPosition(vec3& value) { _position = value; }
+		inline void SetEulerAngles(vec3& value) { _eulerAngles = value; }
+		inline void SetScale(vec3& value) { _scale = value; }
 	protected:
 	private:
-		glm::vec3 m_pos;
-		glm::vec3 m_rot;
-		glm::vec3 m_scale;
+		vec3 _position;
+		vec3 _eulerAngles;
+		vec3 _scale;
 	};
 
 }

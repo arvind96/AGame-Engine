@@ -1,15 +1,19 @@
 #pragma once
-#include "GameObject.h"
+#include "Object.h"
 
 using namespace std;
 
 namespace AGameEngine {
 
-	class Component : public GameObject
+	class GameObject;
+	class Component : public Object
 	{
 	public:
 		Component();
+		Component(GameObject* gameObject);
 		~Component();
+
+		GameObject* gameObject = nullptr;
 	};
 
 }

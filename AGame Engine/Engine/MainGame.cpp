@@ -34,10 +34,10 @@ namespace AGameEngine {
 		_display.Clear(0.0f, 0.15f, 0.15f, 1.0f);
 		_display.Update();
 		cout << "Loading Time: " << SDL_GetTicks() << "ms" << endl;
-		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
-		{
-			mb->Start();
-		}
+		//for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
+		//{
+		//	mb->Start();
+		//}
 		thread tFixed(&MainGame::FixedUpdate, this);
 		tFixed.detach();
 		while (_gameState == GameState::RUNNING)
@@ -55,23 +55,18 @@ namespace AGameEngine {
 		_time.UpdateDeltaTime(SDL_GetTicks() - _updateTimeCounter);
 		_updateTimeCounter = SDL_GetTicks();
 		_input.ProcessInput();
-		/*
-		auto it = MonoBehaviour::allMonoBehaviors.begin();
-		while(it != MonoBehaviour::allMonoBehaviors.end())
-		{
-			(*it)->Update();
-			it++;
-		}
-		*/
+		
 		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
 		{
+			if(mb)
 			mb->Update();
 		}
 		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
 		{
+			if(mb)
 			mb->LateUpdate();
 		}
-
+		
 		_display.Clear(0.0f, 0.15f, 0.15f, 1.0f);
 		_display.Update();
 	}
@@ -86,6 +81,10 @@ namespace AGameEngine {
 			{
 				Sleep(Time::GetFixedDeltaTime() - (SDL_GetTicks() - _fixedTimeCounter));
 			}
+			else
+			{
+				cerr << "Unable to gain the required fixed time step, either increase fixed time step or cpu power :D" << endl;
+			}
 		}
 	}
 
@@ -93,6 +92,7 @@ namespace AGameEngine {
 	{
 		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
 		{
+			if(mb)
 			mb->FixedUpdate();
 		}
 	}
