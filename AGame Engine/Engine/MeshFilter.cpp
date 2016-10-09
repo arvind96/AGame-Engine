@@ -2,11 +2,6 @@
 
 namespace AGameEngine {
 
-	MeshFilter::MeshFilter()
-	{
-	}
-
-
 	MeshFilter::~MeshFilter()
 	{
 	}

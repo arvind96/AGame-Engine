@@ -10,7 +10,6 @@ namespace AGameEngine {
 	{
 	public:
 		Component();
-		Component(GameObject* gameObject);
 		~Component();
 
 		GameObject* gameObject = nullptr;

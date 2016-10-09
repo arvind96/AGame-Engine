@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include <list>
+#include "Component.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ namespace AGameEngine {
 
 		inline void AddComponent(Component* componentRef)
 		{
+			componentRef->gameObject = this;
 			attachedComponents.push_back(componentRef);
 		}
 

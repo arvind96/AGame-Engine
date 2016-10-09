@@ -29,6 +29,10 @@ public:
 	MeshFilter* myMeshFilter;
 	MeshRenderer* myMeshRenderer;
 
+	GameObject* myObject2;
+	MeshFilter* myMeshFilter2;
+	MeshRenderer* myMeshRenderer2;
+
 	GameObject* cameraObject;
 	Camera* camera;
 

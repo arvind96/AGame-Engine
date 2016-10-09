@@ -15,16 +15,20 @@ namespace AGameEngine {
 	GameObject::~GameObject()
 	{
 		delete transform;
-		for each(Component* c in attachedComponents)
+		auto it = attachedComponents.begin();
+		while(it != attachedComponents.end())
 		{
-			delete c;
+			delete *it++;
 		}
 	}
 
-	GameObject::GameObject(const string& name)
+	GameObject::GameObject(const string& name):
+		_isActive(true),
+		layer(0),
+		tag(0)
 	{
-		GameObject();
 		this->name = name;
+		transform = new Transform();
 	}
 
 	bool GameObject::IsActive()

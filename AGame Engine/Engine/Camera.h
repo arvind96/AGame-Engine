@@ -6,6 +6,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include "Mathf.h"
 
 using namespace glm;
 using namespace std;
@@ -20,7 +21,7 @@ namespace AGameEngine {
 
 		inline glm::mat4 GetViewProjection() const
 		{
-			return glm::perspective(fieldOfView * (glm::pi<float>() / 180.0f), aspectRatio, nearPlane, farPlane) * glm::lookAt(vec3(0 , 0, -5), vec3(0, 0, 1), vec3(0, 1, 0));
+			return glm::perspective(_fieldOfView * Mathf::Deg2Rad, aspectRatio, nearPlane, farPlane) * glm::lookAt(gameObject->transform->GetPosition(), vec3(0, 0, 1), vec3(0, 1, 0));
 		}
 
 		//void MoveForward(float amt)
@@ -53,7 +54,15 @@ namespace AGameEngine {
 
 		void CameraLateUpdate();
 
-		const float fieldOfView = 60.0f;
+		inline float GetFieldOfView() 
+		{
+			return _fieldOfView; 
+		}
+		inline void SetFieldOfView(float value) 
+		{
+			_fieldOfView = Mathf::Clamp(value, 1.0f, 179.0f);
+		}
+
 		float aspectRatio = 16.0f/9.0f;
 		float nearPlane = 0.01f;
 		float farPlane = 1000.0f;
@@ -61,6 +70,8 @@ namespace AGameEngine {
 		static list <Camera*> allCameras;	//all cameras in scene
 		static Camera* nullCamera;	//null camera...
 	private:
+		float _fieldOfView = 60.0f;
+
 		glm::vec3 pos;
 		glm::vec3 forward;
 		glm::vec3 up;

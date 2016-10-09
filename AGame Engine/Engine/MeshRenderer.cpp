@@ -4,11 +4,6 @@
 
 namespace AGameEngine {
 
-	MeshRenderer::MeshRenderer()
-	{
-	}
-
-
 	MeshRenderer::~MeshRenderer()
 	{
 	}
