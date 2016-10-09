@@ -37,4 +37,9 @@ namespace AGameEngine {
 		_isActive = value;
 	}
 
+	bool GameObject::CompareTag(int tag)
+	{
+		return this->tag == tag ? true : false;
+	}
+
 }

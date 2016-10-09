@@ -15,6 +15,7 @@ namespace AGameEngine {
 		float GetXInput() { return xInput; }
 		float GetYInput() { return yInput; }
 
+		static bool GetKey(SDL_Scancode scancode);
 		static bool GetKeyDown(SDL_Keycode keycode);
 		static bool GetKeyUp(SDL_Keycode keycode);
 		static bool Quit();
@@ -24,6 +25,7 @@ namespace AGameEngine {
 
 
 		static SDL_Event _singleHitKeyEvent;
+		static const Uint8* _continuousKey;
 	};
 
 }

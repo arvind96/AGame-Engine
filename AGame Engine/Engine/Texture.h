@@ -1,22 +1,26 @@
 #pragma once
-
 #include <string>
 #include <GL/glew.h>
+#include "Object.h"
 
-class Texture
-{
-public:
-	Texture(const std::string& fileName);
+namespace AGameEngine {
 
-	void Bind(unsigned int unit);
+	class Texture : public Object
+	{
+	public:
+		Texture(const std::string& fileName);
 
-	virtual ~Texture();
-protected:
-private:
-	Texture(const Texture& other){}
-	void operator = (const Texture& other) {}
+		void Bind(unsigned int unit);
 
-	GLuint m_texture;
+		~Texture();
+	protected:
+	private:
+		Texture(const Texture& other) {}
+		void operator = (const Texture& other) {}
+
+		GLuint m_texture;
 
 
-};
+	};
+
+}

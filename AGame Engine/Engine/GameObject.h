@@ -25,16 +25,17 @@ namespace AGameEngine {
 			attachedComponents.remove(componentRef);
 		}
 
-		int layer;
-		int tag;
 		bool IsActive();
 		void SetActive(bool value);
+		bool CompareTag(int tag);
+
+		int layer;
+		int tag;
+		Transform* transform;
 	protected:
 
 	private:
 		bool _isActive;
-
-		Transform* transform;
 
 		list<Component*> attachedComponents;
 	};

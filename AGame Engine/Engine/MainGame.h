@@ -8,6 +8,7 @@
 #include "MonoBehaviour.h"
 #include <thread>
 #include "windows.h"
+#include "Renderer.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ namespace AGameEngine {
 		MainGame(int screenWidth, int screenHeight, const string& title);
 		~MainGame();
 
+		void init();
 		void run();
 		void Quit();
 	private:
@@ -29,7 +31,7 @@ namespace AGameEngine {
 		void FixedUpdate();
 		void FixedLoop();
 
-		Display _display;
+		Display* _display;
 		int _displayWidth;
 		int _displayHeight;
 		string _displayTitle;

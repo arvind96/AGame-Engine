@@ -4,6 +4,7 @@
 namespace AGameEngine {
 
 	SDL_Event Input::_singleHitKeyEvent;
+	const Uint8* Input::_continuousKey;
 
 	Input::Input()
 	{
@@ -15,6 +16,7 @@ namespace AGameEngine {
 
 	void Input::ProcessInput()
 	{
+		/*
 		const Uint8* keystate = SDL_GetKeyboardState(NULL);
 
 		//Continuous response keys
@@ -42,6 +44,10 @@ namespace AGameEngine {
 		{
 			yInput = 0.0f;
 		}
+		*/
+
+		//Continuous key processing
+		_continuousKey = SDL_GetKeyboardState(NULL);
 
 		//Single hit key event
 		SDL_Event event;	//Create a new event to overide the older values
@@ -76,6 +82,18 @@ namespace AGameEngine {
 			}
 		}
 		*/
+	}
+
+	bool Input::GetKey(SDL_Scancode scancode)
+	{
+		if (_continuousKey[scancode])
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	bool Input::GetKeyDown(SDL_Keycode keycode)

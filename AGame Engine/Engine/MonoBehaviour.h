@@ -18,7 +18,7 @@ namespace AGameEngine {
 		virtual inline void LateUpdate() {}
 		virtual inline void FixedUpdate() {}
 
-		static std::list <MonoBehaviour*> allMonoBehaviors;
+		static list <MonoBehaviour*> allMonoBehaviors;
 		static MonoBehaviour* nullMonoBehaviour;
 	private:
 	};
