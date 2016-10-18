@@ -11,6 +11,7 @@
 #include "MeshFilter.h"
 #include "MeshRenderer.h"
 #include "Material.h"
+#include "SkyDom.h"
 
 using namespace AGameEngine;
 
@@ -23,6 +24,28 @@ public:
 	void Start();
 	void Update();
 
+	//Loaded Assets
+	Shader* testShader;
+	Material* testMaterial;
+	Texture* testTexture;
+	Mesh* testMesh;
+
+	Mesh* monkeyMesh;
+
+	Mesh* skySphereMesh;
+	Texture* skyTexture;
+	Shader* skyShader;
+	Material* skyMat;
+
+	//Scene
+	GameObject* skySphereObject;
+	MeshFilter* skyFilter;
+	MeshRenderer* skyRenderer;
+	SkyDom* skyDomScript;
+
+	GameObject* cameraObject;
+	Camera* camera;
+
 	MonkeyScript* _myMonkey;
 	
 	GameObject* myObject;
@@ -33,13 +56,6 @@ public:
 	MeshFilter* myMeshFilter2;
 	MeshRenderer* myMeshRenderer2;
 
-	GameObject* cameraObject;
-	Camera* camera;
-
-	Shader* testShader;
-	Material* testMaterial;
-	Texture* testTexture;
-	Mesh* testMesh;
 	Transform* testTransform;
 private:
 };

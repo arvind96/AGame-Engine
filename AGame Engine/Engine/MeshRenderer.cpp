@@ -10,12 +10,7 @@ namespace AGameEngine {
 
 	void MeshRenderer::UpdateRenderer(Camera* camera)
 	{
-		material->shader->Bind();
-		if (material->mainTexture)
-		{
-			material->mainTexture->Bind(0);
-		}
-		material->shader->Update(gameObject->transform, camera);
+		material->Update(gameObject, camera);
 		meshFilter->mesh->Draw();
 	}
 

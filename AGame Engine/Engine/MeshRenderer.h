@@ -12,11 +12,16 @@ namespace AGameEngine {
 		{
 			gameObject->AddComponent(this);
 			this->meshFilter = meshFilter;
-			this->material = material; 
+			SetMaterial(material);
 		}
 		~MeshRenderer();
 
 		void UpdateRenderer(Camera* camera);
+
+		void SetMaterial(Material* material)
+		{
+			this->material = material;
+		}
 
 	private:
 		MeshFilter* meshFilter;

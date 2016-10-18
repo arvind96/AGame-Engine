@@ -84,6 +84,23 @@ namespace AGameEngine {
 		*/
 	}
 
+	vec2 Input::GetMousePosition()
+	{
+		return vec2(_singleHitKeyEvent.motion.x, _singleHitKeyEvent.motion.y);
+	}
+
+	vec2 Input::GetMousePositionDelta()
+	{
+		if (_singleHitKeyEvent.type == SDL_MOUSEMOTION)
+		{
+			return vec2(_singleHitKeyEvent.motion.xrel, _singleHitKeyEvent.motion.yrel);
+		}
+		else
+		{
+			return vec2(0, 0);
+		}
+	}
+
 	bool Input::GetKey(SDL_Scancode scancode)
 	{
 		if (_continuousKey[scancode])

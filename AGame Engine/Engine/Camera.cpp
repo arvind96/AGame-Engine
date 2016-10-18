@@ -9,11 +9,24 @@ namespace AGameEngine {
 	Camera::Camera()
 	{
 		allCameras.push_back(this);
+		UpdateProjectionMatrix();
 	}
 
 	Camera::~Camera()
 	{
 		replace(allCameras.begin(), allCameras.end(), this, nullCamera);
+	}
+
+	void Camera::UpdateProjectionMatrix()
+	{
+		if (_orthographic)
+		{
+			_projection = ortho(-_orthographicSize * _aspectRatio, _orthographicSize * _aspectRatio, -_orthographicSize, _orthographicSize, _nearPlane, _farPlane);
+		}
+		else
+		{
+			_projection = perspective(_fieldOfView * Mathf::Deg2Rad, _aspectRatio, _nearPlane, _farPlane);
+		}
 	}
 
 	void Camera::CameraLateUpdate()

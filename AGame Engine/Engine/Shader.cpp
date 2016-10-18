@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "Transform.h"
+#include "RenderSettings.h"
 
 namespace AGameEngine {
 
@@ -14,9 +15,9 @@ namespace AGameEngine {
 		for (unsigned int i = 0; i < NUM_SHADERS; i++)
 			glAttachShader(m_program, m_shaders[i]);
 
-		glBindAttribLocation(m_program, 0, "position");
-		glBindAttribLocation(m_program, 1, "texCoord");
-		glBindAttribLocation(m_program, 2, "normal");
+		glBindAttribLocation(m_program, 0, "vertexPosition_modelspace");
+		glBindAttribLocation(m_program, 1, "vertexUV");
+		glBindAttribLocation(m_program, 2, "vertexNormal_modelspace");
 
 		glLinkProgram(m_program);
 		CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
@@ -24,12 +25,15 @@ namespace AGameEngine {
 		glValidateProgram(m_program);
 		CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Invalid shader program");
 
-		m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
-		m_uniforms[COLOR_U] = glGetUniformLocation(m_program, "color");
+		m_uniforms[MVP_U] = glGetUniformLocation(m_program, "MVP");
+		m_uniforms[M_U] = glGetUniformLocation(m_program, "M");
+		m_uniforms[V_U] = glGetUniformLocation(m_program, "V");
+		m_uniforms[CameraPosition_U] = glGetUniformLocation(m_program, "CameraPosition");
+		m_uniforms[Color_U] = glGetUniformLocation(m_program, "Color");
+		m_uniforms[SpecColor_U] = glGetUniformLocation(m_program, "SpecColor");
+		m_uniforms[LightDirection_U] = glGetUniformLocation(m_program, "LightDirection");
+		m_uniforms[AmbientColor_U] = glGetUniformLocation(m_program, "AmbientColor");
 
-		//m_uniforms[0] = glGetUniformLocation(m_program, "MVP");
-		//m_uniforms[1] = glGetUniformLocation(m_program, "Normal");
-		//m_uniforms[2] = glGetUniformLocation(m_program, "lightDirection");
 	}
 
 	Shader::~Shader()
@@ -47,23 +51,18 @@ namespace AGameEngine {
 	{
 		glUseProgram(m_program);
 	}
-	/*
-	void Shader::Update(const Transform& transform, const Camera& camera)
-	{
-	glm::mat4 MVP = transform.GetMVP(camera);
-	glm::mat4 Normal = transform.GetModel();
-
-	glUniformMatrix4fv(m_uniforms[0], 1, GL_FALSE, &MVP[0][0]);
-	glUniformMatrix4fv(m_uniforms[1], 1, GL_FALSE, &Normal[0][0]);
-	glUniform3f(m_uniforms[2], 0.0f, 0.0f, 1.0f);
-	}
-	*/
-
 
 	void Shader::Update(const Transform* transform, const Camera* camera)
 	{
-		glm::mat4 model = camera->GetViewProjection() * transform->GetModel();
-		glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+		mat4 modelMatrix = transform->GetModel();
+		mat4 viewMatrix = camera->GetViewMatrix();
+		mat4 mvpMatrix = camera->GetProjectionMatrix() * viewMatrix * modelMatrix;
+
+		glUniformMatrix4fv(m_uniforms[MVP_U], 1, GL_FALSE, &mvpMatrix[0][0]);
+		glUniformMatrix4fv(m_uniforms[M_U], 1, GL_FALSE, &modelMatrix[0][0]);
+		glUniformMatrix4fv(m_uniforms[V_U], 1, GL_FALSE, &viewMatrix[0][0]);
+		glUniform3fv(m_uniforms[CameraPosition_U], 1, &camera->gameObject->transform->GetPosition()[0]);
+		glUniform4fv(m_uniforms[AmbientColor_U], 1, &RenderSettings::GetAmbientColor()[0]);
 	}
 
 

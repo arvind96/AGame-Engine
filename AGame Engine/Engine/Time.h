@@ -22,6 +22,11 @@ namespace AGameEngine {
 		static inline int GetUnscaledDeltaTime() { return _unscaledDeltaTime; }	//returns the unscaled time taken by previous frame in millisecons
 		static inline int GetFixedDeltaTime() { return _fixedDeltaTime; }	//returns the fixed timestep
 		static inline void SetFixedDeltaTime(int value) { _deltaTime = value; }	//sets the value of fixed timestep
+	
+		static inline float GetDeltaTimeInSec() { return _deltaTime / 1000.0f; }	//returns the time taken by previous frame in seconds
+		static inline float GetUnscaledDeltaTimeInSec() { return _unscaledDeltaTime / 1000.0f; }	//returns the unscaled time taken by previous frame in seconds
+		static inline float GetFixedDeltaTimeInSec() { return _fixedDeltaTime / 1000.0f; }	//returns the fixed timestep in seconds
+	
 	private:
 		static Uint32 _realTimeSinceStartup;
 		static float _timeScale;

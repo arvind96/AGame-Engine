@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 #include <SDL\SDL.h>
+#include <glm\glm.hpp>
+
+using namespace glm;
 
 namespace AGameEngine {
 
@@ -14,6 +17,14 @@ namespace AGameEngine {
 
 		float GetXInput() { return xInput; }
 		float GetYInput() { return yInput; }
+
+		static vec2 GetMousePosition();
+		static vec2 GetMousePositionDelta();
+
+		static int SetRelativeMouseMode(SDL_bool enabled)
+		{
+			return SDL_SetRelativeMouseMode(enabled);
+		}
 
 		static bool GetKey(SDL_Scancode scancode);
 		static bool GetKeyDown(SDL_Keycode keycode);

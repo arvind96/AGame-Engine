@@ -30,8 +30,14 @@ namespace AGameEngine {
 
 		enum
 		{
-			TRANSFORM_U,
-			COLOR_U,
+			MVP_U,
+			M_U,
+			V_U,
+			CameraPosition_U,
+			Color_U,
+			SpecColor_U,
+			LightDirection_U,
+			AmbientColor_U,
 
 			NUM_UNIFORMS
 		};

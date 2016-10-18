@@ -105,7 +105,7 @@ namespace AGameEngine {
 		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
 		{
 			if(mb)
-			mb->FixedUpdate();
+				mb->FixedUpdate();
 		}
 	}
 
