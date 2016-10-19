@@ -15,7 +15,6 @@ using namespace AGameEngine;
 int main(int argc, char** argv)
 {
 	MainGame maingame;
-	maingame.init();
 	TestScene testScene(maingame);
 	maingame.run();
 

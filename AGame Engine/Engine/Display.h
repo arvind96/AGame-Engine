@@ -3,20 +3,41 @@
 #include <SDL\SDL.h>
 #include <string>
 
-class Display
-{
-public:
-	Display();
-	Display(int width, int height, const std::string& title);
+using namespace std;
 
-	void Update();
+namespace AGameEngine {
 
-	void Clear(float r, float g, float b, float a);
+	class Display
+	{
+	public:
+		Display();
+		Display(const int& width, const int& height, const string& title);
+		virtual ~Display();
 
-	virtual ~Display();
-private:
+		void Update();
 
-	SDL_Window* m_window;
-	SDL_GLContext m_glContext;
+		void Clear(float r, float g, float b, float a);
 
-};
+		static int GetWidth()
+		{
+			return _width;
+		}
+		static int GetHeight()
+		{
+			return _height;
+		}
+		static string GetTitle()
+		{
+			return _title;
+		}
+	private:
+		static int _width;
+		static int _height;
+		static string _title;
+
+		SDL_Window* m_window;
+		SDL_GLContext m_glContext;
+
+	};
+
+}

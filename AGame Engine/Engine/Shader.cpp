@@ -3,6 +3,7 @@
 #include <fstream>
 #include "Transform.h"
 #include "RenderSettings.h"
+#include "Display.h"
 
 namespace AGameEngine {
 
@@ -28,11 +29,12 @@ namespace AGameEngine {
 		m_uniforms[MVP_U] = glGetUniformLocation(m_program, "MVP");
 		m_uniforms[M_U] = glGetUniformLocation(m_program, "M");
 		m_uniforms[V_U] = glGetUniformLocation(m_program, "V");
-		m_uniforms[CameraPosition_U] = glGetUniformLocation(m_program, "CameraPosition");
+		m_uniforms[P_U] = glGetUniformLocation(m_program, "P");
 		m_uniforms[Color_U] = glGetUniformLocation(m_program, "Color");
 		m_uniforms[SpecColor_U] = glGetUniformLocation(m_program, "SpecColor");
-		m_uniforms[LightDirection_U] = glGetUniformLocation(m_program, "LightDirection");
 		m_uniforms[AmbientColor_U] = glGetUniformLocation(m_program, "AmbientColor");
+		m_uniforms[LightDirection_U] = glGetUniformLocation(m_program, "LightDirection");
+		m_uniforms[CameraPosition_U] = glGetUniformLocation(m_program, "CameraPosition");
 
 	}
 
@@ -65,6 +67,11 @@ namespace AGameEngine {
 		glUniform4fv(m_uniforms[AmbientColor_U], 1, &RenderSettings::GetAmbientColor()[0]);
 	}
 
+	void Shader::GUIUpdate()
+	{
+		mat4 projectionMatrix = ortho(0.0f, (float)Display::GetWidth(), 0.0f, (float)Display::GetHeight());
+		glUniformMatrix4fv(m_uniforms[P_U], 1, GL_FALSE, &projectionMatrix[0][0]);
+	}
 
 	GLuint Shader::CreateShader(const std::string& text, unsigned int type)
 	{

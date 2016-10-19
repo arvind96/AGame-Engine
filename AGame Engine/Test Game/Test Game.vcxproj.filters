@@ -44,5 +44,7 @@
     <None Include="Assets\Shaders\BasicShader.vert" />
     <None Include="Assets\Shaders\UnlitTexture.frag" />
     <None Include="Assets\Shaders\UnlitTexture.vert" />
+    <None Include="Assets\Shaders\TextShader.frag" />
+    <None Include="Assets\Shaders\TextShader.vert" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "TestScene.h"
 #include "GameObject.h"
 #include "RenderSettings.h"
+#include "GUI.h"
 
 using namespace AGameEngine;
 
@@ -73,6 +74,10 @@ void TestScene::Start()
 	//myObject2->transform->SetPosition(vec3(0, -10, 0));
 
 	Input::SetRelativeMouseMode(SDL_TRUE);
+
+	textShader = new Shader("./Assets/Shaders/TextShader");
+	guiSkin = new GUISkin(textShader, "./Assets/Fonts/CarterOne.ttf");
+	guiSkin2 = new GUISkin(textShader, "./Assets/Fonts/ARDESTINE.ttf");
 }
 
 void TestScene::Update()
@@ -162,4 +167,11 @@ void TestScene::Update()
 	{
 		camera->SetOrthographic(!camera->GetOrthographic());
 	}
+	
+}
+
+void TestScene::OnGUI()
+{
+	GUI::Label(guiSkin, "GUI Skin 1 text", vec2(25.0f, 25.0f), 1.0f, glm::vec4(0.5f, 0.8f, 0.2f, 0.5f));
+	GUI::Label(guiSkin2, "Skin 2 text", vec2(25.0f, 500.0f), 0.7f, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 }

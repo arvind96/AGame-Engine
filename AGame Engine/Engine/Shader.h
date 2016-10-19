@@ -16,6 +16,45 @@ namespace AGameEngine {
 
 		void Bind();
 		void Update(const Transform* transform, const Camera* camera);
+		void GUIUpdate();	//update for GUI shader
+
+		//Individual uniform setters
+		inline void SetMVP_U(const mat4& mvp)
+		{
+			glUniformMatrix4fv(m_uniforms[MVP_U], 1, GL_FALSE, &mvp[0][0]);
+		}
+		inline void SetM_U(const mat4& m)
+		{
+			glUniformMatrix4fv(m_uniforms[M_U], 1, GL_FALSE, &m[0][0]);
+		}
+		inline void SetV_U(const mat4& v)
+		{
+			glUniformMatrix4fv(m_uniforms[V_U], 1, GL_FALSE, &v[0][0]);
+		}
+		inline void SetP_U(const mat4& p)
+		{
+			glUniformMatrix4fv(m_uniforms[P_U], 1, GL_FALSE, &p[0][0]);
+		}
+		inline void SetColor_U(const vec4& color)
+		{
+			glUniform4fv(m_uniforms[Color_U], 1, &color[0]);
+		}
+		inline void SetSpecColor_U(const vec4& color)
+		{
+			glUniform4fv(m_uniforms[SpecColor_U], 1, &color[0]);
+		}
+		inline void SetAmbientColor_U(const vec4& color)
+		{
+			glUniform4fv(m_uniforms[AmbientColor_U], 1, &color[0]);
+		}
+		inline void SetLightDirection_U(const vec3& direction)
+		{
+			glUniform3fv(m_uniforms[LightDirection_U], 1, &direction[0]);
+		}
+		inline void SetCameraPosition_U(const vec3& position)
+		{
+			glUniform3fv(m_uniforms[CameraPosition_U], 1, &position[0]);
+		}
 
 		virtual ~Shader();
 	private:
@@ -33,18 +72,21 @@ namespace AGameEngine {
 			MVP_U,
 			M_U,
 			V_U,
-			CameraPosition_U,
+			P_U,
 			Color_U,
 			SpecColor_U,
-			LightDirection_U,
 			AmbientColor_U,
+			LightDirection_U,
+			CameraPosition_U,
+			
 
 			NUM_UNIFORMS
 		};
 
-		GLuint m_program;
+		
 		GLuint m_shaders[NUM_SHADERS];
 		GLuint m_uniforms[NUM_UNIFORMS];
+		GLuint m_program;
 	};
 
 }

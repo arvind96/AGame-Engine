@@ -9,6 +9,7 @@
 #include <thread>
 #include "windows.h"
 #include "Renderer.h"
+#include "GUI.h"
 
 using namespace std;
 
@@ -19,11 +20,9 @@ namespace AGameEngine {
 	class MainGame
 	{
 	public:
-		MainGame();
-		MainGame(int screenWidth, int screenHeight, const string& title);
+		MainGame(const int& screenWidth = 1024,const int& screenHeight = 576, const string& title = "Title");
 		~MainGame();
 
-		void init();
 		void run();
 		void Quit();
 	private:
@@ -32,11 +31,8 @@ namespace AGameEngine {
 		void FixedLoop();
 
 		Display* _display;
-		int _displayWidth;
-		int _displayHeight;
-		string _displayTitle;
-		Input _input;
-		Time _time;
+		Input* _input;
+		Time* _time;
 		GameState _gameState;
 
 		int _updateTimeCounter = 0;

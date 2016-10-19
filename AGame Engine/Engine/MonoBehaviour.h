@@ -17,6 +17,7 @@ namespace AGameEngine {
 		virtual inline void Update() {}
 		virtual inline void LateUpdate() {}
 		virtual inline void FixedUpdate() {}
+		virtual inline void OnGUI() {}
 
 		static list <MonoBehaviour*> allMonoBehaviors;
 		static MonoBehaviour* nullMonoBehaviour;

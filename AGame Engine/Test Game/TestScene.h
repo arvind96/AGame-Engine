@@ -12,6 +12,7 @@
 #include "MeshRenderer.h"
 #include "Material.h"
 #include "SkyDom.h"
+#include "GUISkin.h"
 
 using namespace AGameEngine;
 
@@ -23,6 +24,7 @@ public:
 
 	void Start();
 	void Update();
+	void OnGUI();
 
 	//Loaded Assets
 	Shader* testShader;
@@ -57,6 +59,10 @@ public:
 	MeshRenderer* myMeshRenderer2;
 
 	Transform* testTransform;
+
+	Shader* textShader;
+	GUISkin* guiSkin;
+	GUISkin* guiSkin2;
 private:
 };
 

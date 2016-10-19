@@ -2,20 +2,13 @@
 
 namespace AGameEngine {
 
-	MainGame::MainGame() :
-		_displayWidth(1024),
-		_displayHeight(576),
-		_displayTitle("Game Title"),
-		_gameState(GameState::RUNNING)
+	MainGame::MainGame(const int& screenWidth, const int& screenHeight, const string& title)
 	{
-	}
-
-	MainGame::MainGame(int displayWidth, int displayHeight, const string& displayTitle)
-	{
-		_displayWidth = displayWidth;
-		_displayHeight = displayHeight;
-		_displayTitle = displayTitle;
 		_gameState = GameState::RUNNING;
+		_display = new Display(screenWidth, screenHeight, title);
+		_display->Clear(0.0f, 0.15f, 0.15f, 1.0f);
+		_display->Update();
+		cout << "Init time: " << SDL_GetTicks() << "ms" << endl;
 	}
 
 	MainGame::~MainGame()
@@ -26,14 +19,6 @@ namespace AGameEngine {
 	void MainGame::Quit()
 	{
 		_gameState = GameState::EXIT;
-	}
-
-	void MainGame::init()
-	{
-		_display = new Display(_displayWidth, _displayHeight, _displayTitle);
-		_display->Clear(0.0f, 0.15f, 0.15f, 1.0f);
-		_display->Update();
-		cout << "Init time: " << SDL_GetTicks() << "ms" << endl;
 	}
 
 	void MainGame::run()
@@ -58,9 +43,9 @@ namespace AGameEngine {
 
 	void MainGame::GameLoop()
 	{
-		_time.UpdateDeltaTime(SDL_GetTicks() - _updateTimeCounter);
+		_time->UpdateDeltaTime(SDL_GetTicks() - _updateTimeCounter);
 		_updateTimeCounter = SDL_GetTicks();
-		_input.ProcessInput();
+		_input->ProcessInput();
 
 		_display->Clear(0.0f, 0.15f, 0.15f, 1.0f);
 
@@ -79,7 +64,11 @@ namespace AGameEngine {
 			if(cam)
 				cam->CameraLateUpdate();
 		}
-
+		for each (MonoBehaviour* mb in MonoBehaviour::allMonoBehaviors)
+		{
+			if (mb)
+				mb->OnGUI();
+		}
 		_display->Update();
 	}
 
